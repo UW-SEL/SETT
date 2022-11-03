@@ -15,8 +15,8 @@ classdef ModII < handle
                 "shell", struct(                ... %information about the shell
                     "material", "Stellite21",   ... %material - must be included in solid utility function
                     "R_sh", 0.040,              ... %outer radius (m)
-                    "th_sh_cold", 0.006,        ... %thickness at the cold end (m)
-                    "th_sh_hot", 0.0115,        ... %thickness at the hot end (m)
+                    "th_sh_cold", 0.004,        ... %thickness at the cold end (m)
+                    "th_sh_hot", 0.0095,        ... %thickness at the hot end (m)
                     "length", 0.050             ... %length (m)
                 )                               ...
             ),                                  ...

@@ -133,10 +133,7 @@ classdef GPU3 < handle
             %Friction
             Pressure=engine.P_ave/1e6;
             N = obj.freq*60;
-            %Friction=0+0.22905801*Pressure-0.024248599*Pressure^2-0.00051029684*N+2.6561433E-7*N^2+0.000038763495*Pressure*N;  %the average friction at each data point correlated with P and N
-            %Friction=0.86965403+0.065986581*Pressure-0.0127752*Pressure^2-0.00091780314*N+3.2678571E-7*N^2+0.000057901465*Pressure*N;
-            %Friction=0.38637407+0.12426242*Pressure-0.014532836*Pressure^2-0.00062017736*N+2.7000000E-7*N^2+0.00003392277*Pressure*N;
-            Friction=-0.30378556+0.086701731*Pressure+2.0086292E-7*N^2;  %average friction correlation not including cross terms to allow extrapoloation
+            Friction=0.20378556+(0.056701731)*Pressure+(1.2086292E-7)*N^2;  %average friction correlation not including cross terms to allow extrapoloation
             
             obj.W_dot_fr = Friction*1000;
             obj.W_parasitic_e = obj.W_dot_fr;

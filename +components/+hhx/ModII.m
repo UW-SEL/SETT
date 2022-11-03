@@ -66,7 +66,7 @@ classdef ModII < handle
         correlation (1,1) string
         materialtube (1,1) string
         materialfin (1,1) string
-
+        eta_c (1,1) double
         rpt (16,1) double
     end
 
@@ -134,10 +134,10 @@ classdef ModII < handle
             %--------------------------------
             %steady flow friction and htc
             L_t = (obj.L_f + obj.L_r + obj.L_ia);  %total length of tube
-            [DP_tube, htc_g] = util.tubeFlow(fluidProps, m_dot_avg/obj.N_t, obj.D_t_i, L_t, obj.roughness);
+            [DP_tube, htc_g] = util.tubeFlow(fluidProps, m_dot_avg/obj.N_t, obj.D_t_i, L_t, obj.roughness, 1);
             
             %get minor loss
-            K_h = 2.5; %assumed total minor loss coefficient (expansion/contraction and bend)
+            K_h = 10; %assumed total minor loss coefficient (expansion/contraction and bend)
             Ac_g = pi * obj.D_t_i^2 / 4 * obj.N_t;  %cross-sectional area for flow in tubes
             u_g_avg = m_dot_avg / (rho_g * Ac_g);   %average velocity
 
@@ -163,9 +163,9 @@ classdef ModII < handle
             HHV = 44.8e6; %higher heating value of diesel fuel (J/kg)
             Q_dot_in = (Q_dot_avg + engine.ws.Q_parasitic_e + engine.regen.Q_parasitic);  %total heat transfer to engine less combustion system loss
             m_dot_f_0 = Q_dot_in/(HHV*0.9); %initial guess for fuel flow rate per cylinder
-            m_dot_f = fzero(@(mf) 0.9*(1-exp(-(mf/0.00002)^0.5))*mf*HHV-Q_dot_in,m_dot_f_0); %solve to find fuel flow rate per cylinder - note this neglects fuel required for heat transfer parasitics
-            eta_c = 0.9*(1-exp(-(m_dot_f/0.00002)^0.5));  %combustion system efficiency
-            obj.Q_parasitic = Q_dot_in*(1/eta_c - 1);  %parasitic heat transfer from combustion system
+            m_dot_f = fzero(@(mf) 0.93*(1-exp(-(mf/0.00001)^0.5))*mf*HHV-Q_dot_in,m_dot_f_0); %solve to find fuel flow rate per cylinder - note this neglects fuel required for heat transfer parasitics
+            obj.eta_c = 0.93*(1-exp(-(m_dot_f/0.00001)^0.5));  %combustion system efficiency
+            obj.Q_parasitic = Q_dot_in*(1/obj.eta_c - 1);  %parasitic heat transfer from combustion system
             
             m_dot_a = m_dot_f*AF*(1+CGF); %air mass flow rate passing over hhx per cylinder
             
@@ -212,8 +212,7 @@ classdef ModII < handle
             UA = 1 / R_total;  %total conductance
             Rst_in = (1/(R_t_f + R_g_f)+1/(R_t_f + R_g_r))^(-1); %thermal resistance from tube material to working fluid
             
-            
-            
+                       
             % Determine approach temperature difference
             C_dot_a = m_dot_a * c_a;    %capacitance rate of the air
             DT_a = Q_dot_avg/C_dot_a;   %temperature change of the air
@@ -232,7 +231,7 @@ classdef ModII < handle
             T_comb = engine.T_l + DT_total;  %approximate combustion temperature - should not be too different than assumed combustion temp.
             
             %parameters to be saved for report
-            obj.rpt(1) = eta_c;
+            obj.rpt(1) = obj.eta_c;
             obj.rpt(2) = DP_tube;
             obj.rpt(3) = DP_minor;
             obj.rpt(4) = htc_g;

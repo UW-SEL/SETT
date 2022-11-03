@@ -26,7 +26,7 @@ function [rho, c, k] = Solid(material, T)
             c=104;
             k=8.192475 + 0.0135*T;
             rho = 8200;
-            if ((T<300)|(T>1000))
+            if ((T<300)|(T>1100))
                 warning("Temperature out of range in solid for Multimet");
             end
         

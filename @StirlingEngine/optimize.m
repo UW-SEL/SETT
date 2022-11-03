@@ -78,6 +78,7 @@ function [x, fval, exitflag, output] = optimize(obj, target, name, bounds, optio
         "TolFun", options.TolFun,    ...
         "TolX", options.TolX         ...
     );
+
     [x, fval, exitflag, output] = fminsearchbnd(@(x) runEngine(x, nominalValues), x0, lb, ub, fminOptions);
 
     function r = runEngine(x, nominalValues)

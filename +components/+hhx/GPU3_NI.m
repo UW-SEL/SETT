@@ -16,7 +16,7 @@ classdef GPU3_NI < handle
             "roughness", 1e-5,   ... %m, roughness on internal tube surface
             "N_total", 40,       ... %-, total number of tubes
             "vol_h", 1e-6,       ... %m^3, header volume of heat exchanger
-            "R_ins", 0.2,        ... %K-m^2/W, area-specific thermal resistance of the insulation system
+            "R_ins", 0.1,        ... %K-m^2/W, area-specific thermal resistance of the insulation system
             "W_parasitic", 0     ...
         )
     end

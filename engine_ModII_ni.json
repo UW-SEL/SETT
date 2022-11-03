@@ -1,0 +1,114 @@
+{
+  "fluid": {
+    "model": "RealGasRefprop",
+    "params": {
+      "name": "Hydrogen"
+    }
+  },
+  "ws": {
+    "model": "ModII",
+    "params": {
+      "D": 0.068,
+      "L": 0.0435,
+      "L_cond": 0.095,
+      "R_c": "Inf",
+      "R_e": "Inf",
+      "V_clearance_c": 2.54e-05,
+      "V_clearance_e": 1.21e-05,
+      "e": 0.1,
+      "frequency": 66.6667,
+      "h": 0.0005,
+      "material_c": "Stellite21",
+      "material_p": "AISI1010",
+      "phaseAngle": 90,
+      "stroke": 0.034,
+      "th_cw": 0.005,
+      "th_pw": 0.003
+    }
+  },
+  "chx": {
+    "model": "ModII",
+    "params": {
+      "W_dot_p_fs": 188,
+      "correlation": "oscillating",
+      "fluid": "water",
+      "geometry": {
+        "shell": {
+          "Ac_header": 0.00035,
+          "R_inner": 0.0405,
+          "V_header": 2.5e-05
+        },
+        "tubes": {
+          "D_inner": 0.001,
+          "D_outer": 0.002,
+          "N_total": 449,
+          "length": 0.093,
+          "length_ht": 0.081,
+          "material": "SS304",
+          "roughness": 1.5e-06
+        }
+      },
+      "m_dot_p_fs": 2.3,
+      "n_fs": 66.7
+    }
+  },
+  "regen": {
+    "model": "ModII",
+    "params": {
+      "correlationf": "Gedeon and Wood",
+      "correlationj": "Gedeon and Wood",
+      "correlationtype": "steady",
+      "geometry": {
+        "mesh": {
+          "D_wire": 5e-05,
+          "material": "SS304",
+          "pitch": 5650
+        },
+        "shell": {
+          "R_sh": 0.04,
+          "length": 0.05,
+          "material": "Stellite21",
+          "th_sh_cold": 0.004,
+          "th_sh_hot": 0.0095
+        }
+      }
+    }
+  },
+  "hhx": {
+    "model": "ModII_NI",
+    "params": {
+      "R_f": 0.15,
+      "L_f": 0.15,
+      "R_regen": 0.15,
+      "D_inner": 0.00302,
+      "D_outer": 0.00483,
+      "k_f": 5,
+      "roughness": 1e-05,
+      "N_total": 40,
+      "vol_h": 1e-06,
+      "R_ins": 0.1,
+      "W_parasitic": 0
+    }
+  },
+  "solver": {
+    "innerLoopTolerance": {
+      "abs": 1e-06,
+      "rel": 0.0001
+    },
+    "odeSolver": "ode45",
+    "odeTolerance": {
+      "abs": 1e-06,
+      "rel": 0.0001
+    },
+    "outerLoopTolerance": {
+      "abs": 1,
+      "rel": 0.1
+    },
+    "timeResolution": 5
+  },
+  "conditions": {
+    "T_cold": 323,
+    "T_hot": 1093,
+    "P_0": 1e+07
+  }
+}

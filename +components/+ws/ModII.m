@@ -12,7 +12,7 @@ classdef ModII < handle
             "frequency", 66.6667,        ... %frequency of the engine (rev/s)
             "phaseAngle", 90,            ... %phase angle between compression and expansion space (degree)
             "D", 0.0680,                 ... %bore diameter (m)
-            "h", 0.000163,               ... %clearance between piston and cylinder (m)
+            "h", 0.0005,               ... %clearance between piston and cylinder (m)
             "L", 0.0435,                 ... %length of piston/cylinder gap (m)
             "stroke", 0.034,             ... %stroke (m)
             "V_clearance_c", 25.4e-6,    ... %clearance volume in compression space (m^3)
@@ -21,10 +21,10 @@ classdef ModII < handle
             "R_e", Inf,                  ... %thermal resistance between expansion space gas and wall (K/W)
             "material_p", "AISI1010",    ... %piston material (must be available in Solid.m)
             "material_c", "Stellite21",  ... %cylinder material (must be available in Solid.m)
-            "th_pw", 0.005,              ... %piston wall thickness
-            "th_cw", 0.008,              ... %cylinder wall thickness
-            "L_cond", 0.075,             ... %length to use in conduction calculation
-            "e", 0.5                     ... %emissivity to use in radiation calculation
+            "th_pw", 0.003,              ... %piston wall thickness
+            "th_cw", 0.005,              ... %cylinder wall thickness
+            "L_cond", 0.095,             ... %length to use in conduction calculation
+            "e", 0.1                     ... %emissivity to use in radiation calculation
         )
     end
 
@@ -110,7 +110,7 @@ classdef ModII < handle
             t_max = t(find(P==P_max,1));
             phi = 2*pi*t_max*engine.freq - pi/2;
             DP = (P_max - P_min)/2; %pressure amplitude
-            [SHL]=util.shuttleheattransfer(obj.D, obj.h, obj.L, obj.stroke, obj.omega, obj.material_c, DP, engine, phi);
+            [SHL]=util.shuttleheattransfer(obj.D, obj.h, obj.L, obj.stroke, obj.omega, obj.material_c, DP, engine, phi,2);
             
             %get conduction heat transfer
             gv(1) = pi*obj.D*obj.th_cw;
@@ -140,7 +140,7 @@ classdef ModII < handle
         function lastCallUpdate(obj, engine)
                                 
             %get friction
-            W_dot_f=1000*(0.0029098034-0.00067365469*engine.P_ave/1e6+0.013309624*engine.freq+0.0026824721*engine.P_ave*engine.freq/1e6);
+            W_dot_f=1000*(0.00205475581*engine.freq+0.073212869*engine.P_ave/1e6);  %friction with cross-terms eliminated so that extrapolation is better
             
             %get auxiliaries
             if(engine.freq<10)

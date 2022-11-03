@@ -1,0 +1,104 @@
+{
+  "fluid": {
+    "model": "RealGasRefprop",
+    "params": {
+      "name": "Hydrogen"
+    }
+  },
+  "ws": {
+    "model": "GPU3",
+    "params": {
+      "D": 0.0701,
+      "D_dr": 0.00953,
+      "L": 0.0436,
+      "L_conn": 0.04602,
+      "R_c": "Inf",
+      "R_e": "Inf",
+      "V_clearance_c": 5.785e-06,
+      "V_clearance_e": 4.13e-06,
+      "eccentricity": 0.02065,
+      "frequency": 25,
+      "h": 0.000163,
+      "r_crank": 0.01397
+    }
+  },
+  "chx": {
+    "model": "GPU3",
+    "params": {
+      "Ac_h": 0.00022386,
+      "D_inner": 0.00108,
+      "D_outer": 0.00159,
+      "D_sh": 0.0226,
+      "N_shell": 8,
+      "N_total": 312,
+      "UA_a": 500,
+      "W_parasitic": 0,
+      "coolant": "Water",
+      "length_ht": 0.0355,
+      "length_total": 0.0461,
+      "m_dot_a": 0.35,
+      "m_dot_w": 0.136,
+      "roughness": 1.5e-06,
+      "vol_h": 1e-05
+    }
+  },
+  "regen": {
+    "model": "GPU3",
+    "params": {
+      "Q_parasitic": 0,
+      "bypass": 0,
+      "correlationf": "Gedeon and Wood",
+      "correlationj": "Gedeon and Wood",
+      "geometry": {
+        "mesh": {
+          "D_wire": 4.06e-05,
+          "material": "Stainless Steel",
+          "pitch": 8386
+        },
+        "shell": {
+          "diameter": 0.0226,
+          "length": 0.02261,
+          "number": 8
+        },
+        "vol_h": 1e-06
+      }
+    }
+  },
+  "hhx": {
+    "model": "GPU3",
+    "params": {
+      "D_inner": 0.00302,
+      "D_outer": 0.00483,
+      "L_htr": 0.1554,
+      "L_total": 0.2423,
+      "N_total": 40,
+      "R_tc": 0.0762,
+      "W_parasitic": 0,
+      "eta_comb": 0.85,
+      "roughness": 1e-05,
+      "vol_h": 1e-06,
+      "R_c_loss": 0.4
+    }
+  },
+  "solver": {
+    "innerLoopTolerance": {
+      "abs": 1e-04,
+      "rel": 0.01
+    },
+    "odeSolver": "ode45",
+    "odeTolerance": {
+      "abs": 1e-06,
+      "rel": 0.0001
+    },
+    "outerLoopTolerance": {
+      "abs": 0.1,
+      "rel": 0.01
+    },
+    "timeResolution": 5
+  },
+  "conditions": {
+    "T_cold": 323,
+    "T_hot": 973,
+    "P_0": 1e+07
+  }
+}

@@ -1,4 +1,4 @@
-function [DP_g, h] = tubeFlow(fluid_properties, m_dot, D, L, roughness)
+function [DP_g, h] = tubeFlow(fluid_properties, m_dot, D, L, roughness, ft)
 
     % tubeFlow Provide the pressure drop and heat transfer for flow through
     % a round tube assuming steady state - use the function oscillatingFlow
@@ -10,7 +10,8 @@ function [DP_g, h] = tubeFlow(fluid_properties, m_dot, D, L, roughness)
     % D, inner diameter (m)
     % L, length of tube (m)
     % roughness, tube wall roughness (m)
-         
+    % ft, optional parameter - set to 1 to force turbulent result
+    
     %properties 
     cp_g = fluid_properties.CP;
     rho_g = fluid_properties.rho;
@@ -18,9 +19,11 @@ function [DP_g, h] = tubeFlow(fluid_properties, m_dot, D, L, roughness)
     k_g = fluid_properties.k;
     Pr_g = mu_g * cp_g / k_g;
     A_c = pi*D^2/4;                     %Cross sectional area
-    u_g = m_dot/(rho_g*A_c);            %velocity
-    Re_g = rho_g*u_g*D/mu_g;            %Reynolds number 
-    
+    u_g = m_dot/(rho_g*A_c);          %velocity
+    Re_g = u_g*D*rho_g/mu_g;
+    if exist('ft','var')
+        Re_g = Re_g + 5000;  %add 5000 to force it into turbulent logic - subtract 5000 there
+    end
     if Re_g < 2300
          %laminar flow
          L_hat = L / (D * Re_g);        %dimensionless length
@@ -48,6 +51,9 @@ function [DP_g, h] = tubeFlow(fluid_properties, m_dot, D, L, roughness)
          Nusselt_g = Nusselt_g_low + (Re_g - 2300) / (4000 - 2300) * (Nusselt_g_high - Nusselt_g_low);
          f_g = f_g_low + (Re_g - 2300) / (4000 - 2300) * (f_g_high - f_g_low);
     else
+         if exist('ft','var')
+             Re_g = Re_g - 5000;  %subtract 5000 to get actual Re
+         end
          %turbulent flow
          if roughness == 0
               %smooth turbulent flow
@@ -70,7 +76,7 @@ function [DP_g, h] = tubeFlow(fluid_properties, m_dot, D, L, roughness)
          Nusselt_g = (f_g / 8) * (Re_g - 1000) * Pr_g / (1 + 12.7 * (Pr_g^(2/3) - 1) * sqrt(f_g / 8));
          Nusselt_g = Nusselt_g * (1 + (L / D)^(-0.7));  %correct for developing flow
          f_g = f_g*(1+(L / D)^(-0.7)); %correct for developing flow
-     end
+    end
      h = Nusselt_g * k_g / D;  %heat transfer coefficient
      DP_g = rho_g * u_g^2 / 2 * (f_g * L / D);
     

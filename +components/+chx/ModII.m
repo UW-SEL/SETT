@@ -128,7 +128,7 @@ classdef ModII < handle
             
             %additional minor loss due to CHX to compression space header
             u_h=m_dot_avg/(rho_g*obj.Ac_h);
-            K_h = 1.5; %assumed minor loss coefficient
+            K_h = 5; %assumed minor loss coefficient
             DP_h = K_h*rho_g*u_h^2/2;
             
             DP_g = DP_tube+DP_minor+DP_h;  %total steady pressure loss
