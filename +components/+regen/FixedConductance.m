@@ -38,7 +38,6 @@ classdef FixedConductance < handle
 
         function update(obj, engine)
             % Update the value for DT based on the current engine state
-            % TODO: add catch for UA < 0 is a perfect hxr
 
             % Calculate average capacitance rate
             m_dot_avgs = 0.5 * (engine.stateValues.m_dot_kr + engine.stateValues.m_dot_rl);
@@ -48,7 +47,6 @@ classdef FixedConductance < handle
                 abs(m_dot_avgs) .* CPs        ...
             );
 
-            % TODO: verify these equations
             NTU=obj.UA/C_dot_avg;
             obj.eff=(NTU/2)/(1+(NTU/2));
             obj.DT=(1-obj.eff)*(engine.T_l-engine.T_k);

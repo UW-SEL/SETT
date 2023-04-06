@@ -1,10 +1,8 @@
-% ModII / ModI_A Engine working space model
+% Mod II / Mod I Engine working space model
 %
-% TODO: Update the below comment when component is finalized:
-%
-% This is the model of the Mod I working spaces
-% The model returns friction based on a curve fit to the values in the
-% design review and auxiliary power from the same source
+% This is the model of the Mod I working spaces.  The model returns friction
+% based on a curve fit to the values in the design review and auxiliary power
+% from the same source.
 
 classdef ModII < handle
     properties (Constant)
@@ -12,7 +10,7 @@ classdef ModII < handle
             "frequency", 66.6667,        ... %frequency of the engine (rev/s)
             "phaseAngle", 90,            ... %phase angle between compression and expansion space (degree)
             "D", 0.0680,                 ... %bore diameter (m)
-            "h", 0.0005,               ... %clearance between piston and cylinder (m)
+            "h", 0.0005,                 ... %clearance between piston and cylinder (m)
             "L", 0.0435,                 ... %length of piston/cylinder gap (m)
             "stroke", 0.034,             ... %stroke (m)
             "V_clearance_c", 25.4e-6,    ... %clearance volume in compression space (m^3)

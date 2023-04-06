@@ -1,11 +1,9 @@
 % Mod II / Mod I Cold Heat Exchanger
 %
-% TODO: Update the below comment when component is finalized:
-%
-% This model of the Mod I cold heat exchanger is for a woven screen regenerator
-% The model assumes that T_cold is the inlet coolant temperature and does
-% not consider the coolant-to-air heat exchanger.  The model computes the
-% pump power (per cylinder) and flow rate based on engine speed
+% This model of the Mod II / Mod I cold heat exchanger is for a woven screen
+% regenerator.  The model assumes that T_cold is the inlet coolant temperature
+% and does not consider the coolant-to-air heat exchanger.  The model computes
+% the pump power (per cylinder) and flow rate based on engine speed.
 
 classdef ModII < handle
     properties (Constant)
@@ -144,7 +142,6 @@ classdef ModII < handle
             obj.R_hyd = DP_g / (m_dot_avg / rho_g);
            
             %Determine coolant side characteristics
-            %TODO - we need a Liquid.m utility function to avoid having to do this
             switch obj.coolant
                 case "water"
                     rho_c = util.properties.Water("dens", (engine.T_cold+engine.T_k)/2);

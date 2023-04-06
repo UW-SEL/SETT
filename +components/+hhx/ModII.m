@@ -1,11 +1,9 @@
 % Mod II / Mod I Hot Heat Exchanger
 %
-% TODO: Update the below comment when component is finalized:
-%
-% This model of the Mod I hot heat exchanger is for the staggered two row tube
-% bank (first row is unfinned and second row is finned).  The model assumes that
-% T_hot is the hottest tube temperature and models the combustion system with an
-% efficiency.  The blower power and atomizing air compressor power are computed
+% This model of the Mod II / Mod I hot heat exchanger is for the staggered two row
+% tube bank (first row is unfinned and second row is finned).  The model assumes
+% that T_hot is the hottest tube temperature and models the combustion system with
+% an efficiency.  The blower power and atomizing air compressor power are computed
 % based on engine speed and power.  The mass flow rate of fuel is computed based
 % on heat release and the flow rate of air over the heat exchanger is computed
 % using an assumed value of recirculation.

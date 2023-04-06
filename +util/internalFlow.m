@@ -7,7 +7,6 @@ function [f, Nu] = internalFlow(Re, Pr, L_tube, D_h, roughness)
     % L_tube: Length of tube [m] 
     % D_h: hydraulic diameter of tube [m] 
     % roughness [m]
-    % TODO: Add expected units for inputs
 
     % get Nusselt number and friction factor from correlations
     if Re < 2300

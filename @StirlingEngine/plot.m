@@ -10,7 +10,6 @@ function plot(obj, plotType, varargin)
     %   performance-map
 
     % Define and parse the function arguments
-    % TODO: Convert this to the preferred arguments block format
     p = inputParser;
     addRequired(p, "plotType");
     addParameter(p, "figNumber", 0, @(x) isscalar(x) && (x > 0));
@@ -119,8 +118,6 @@ end
 function plotTemperature(obj)
     t = obj.stateValues.time;
     t_endpoints = [t(1), t(end)];
-
-    % TODO: adjust colors and legend location
     plot(t_endpoints, [obj.T_hot, obj.T_hot], "DisplayName", "T_{hot}")
     hold on
     plot(t, obj.stateValues.T_e, "DisplayName", "T_e")
@@ -153,7 +150,7 @@ function plotPerformanceMap(obj)
     fig = gcf();
     fig.Visible = false;
 
-    % TODO: These should come from function arguments...
+    % TODO: These need to be provided as function arguments
     speedLow = 500;
     speedHigh = 4500;
     presLow = 1e6;
@@ -168,7 +165,7 @@ function plotPerformanceMap(obj)
     efficiency = NaN(size(speed));
     power = NaN(size(speed));
 
-    f = waitbar(...
+    f = waitbar(                              ...
         0,                                    ...
         "",                                   ...
         "Name","Generating Performance Map",  ...

@@ -11,7 +11,6 @@ function r = IdealGasAir(property, T, P)
     %   cp   -- specific heat at constant pressure [J/kg-K] (P is not required for this property)
     %   visc -- viscosity [Pa-s]
     %   cond -- thermal conductivity [W/m-K]
-    % TODO: Add other properties as needed
     %
     % Enthalpy and CP are based on curve fits between 250 K and 1800 K.  Note that pressure
     % is not required for some properties and will be silently ignored if it is provided.

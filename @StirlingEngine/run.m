@@ -297,9 +297,9 @@ function DT_regen_hot = solveRegen(obj, DT_regen_hot)
     % other approach must be iteratively updated each outer loop knowing the heat flow in to and
     % out of the regenerator over a cycle must sum to zero.
     %
-    % TODO: For now we assume min ΔT is on the cold side...
-    %       In the future we could check this on each iteration and swap if needed,
-    %       or we could say that the DT of the regen component must always be cold side
+    % TODO: For now we assume min ΔT is on the cold side.  In the future we could check this on
+    %       each iteration and swap if needed, or we could say that the DT of the regen component
+    %       must always be cold side.
 
     % Calculate total energy flow to and from the chx
     neg_flow_cold = obj.stateValues.m_dot_kr < 0;  % negative m_dot is flow out to chx
@@ -319,7 +319,7 @@ function DT_regen_hot = solveRegen(obj, DT_regen_hot)
     Q_dot_hot = obj.stateValues.m_dot_rl .* h_hot;
     Q_hot = trapz(obj.stateValues.time, Q_dot_hot);
 
-    adjustment = (Q_cold - Q_hot) / Q_hot;  % TODO: compare stability and speed with different normalizing values
+    adjustment = (Q_cold - Q_hot) / Q_hot;
     DT_regen_hot = DT_regen_hot * (1 + adjustment);
 end
 

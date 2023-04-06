@@ -88,7 +88,6 @@ POSSIBILITY OF SUCH DAMAGE.
 %}
 
 
-% TODO: clean up this function and test it
 function writeConfigFile(configData, configFilePath)
     fid = fopen(configFilePath,'w');
     writeElement(fid, configData,'');

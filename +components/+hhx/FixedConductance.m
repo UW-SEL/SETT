@@ -40,7 +40,6 @@ classdef FixedConductance < handle
 
         function update(obj, engine)
             % Update the value for DT based on the current engine state
-            % TODO: add flag that UA < 0 is perfect hxr (or Inf value for UA)
 
             % Get total heat transfer rate
             Q_dot_e = 0;
@@ -64,8 +63,6 @@ classdef FixedConductance < handle
             );
 
             % Calculate average capacitance rate
-            % TODO: Could we integrate capacitance rate calculated at all times instead of using
-            %       average m_dot and pressure?  An example of this is in regen/FixedConductance.m
             fluidProps = engine.fluid.allProps(engine.T_l, engine.P_ave);
             C_dot_avg = fluidProps.CP * m_dot_avg;
 

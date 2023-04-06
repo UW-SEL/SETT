@@ -33,7 +33,6 @@ classdef FixedConductance < handle
         function firstCallUpdate(obj, engine)
             % Provide an initial guess value for DT (before engine states are available)
             if obj.UA < 0  % negative UA indicates a perfect heat exchanger
-                % TODO: Instead of using a negative UA, we could use an Inf value to indicate a perfect hxr
                 obj.DT = 0;
             else
                 obj.DT = min(10, 0.1 * (engine.T_hot - engine.T_cold));
@@ -69,8 +68,6 @@ classdef FixedConductance < handle
             );
 
             % Calculate average capacitance rate
-            % TODO: Could we integrate capacitance rate calculated at all times instead of using
-            %       average m_dot and pressure?  An example of this is in regen/FixedConductance.m
             fluidProps = engine.fluid.allProps(engine.T_k, engine.P_ave);
             C_dot_avg = fluidProps.CP * m_dot_avg;
 

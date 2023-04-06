@@ -27,7 +27,7 @@ classdef StirlingEngine < handle
         save(obj, filename)
     end
 
-    properties (SetAccess = public)  % TODO: set access public is temporary until an updateTol func is available
+    properties (SetAccess = private)
         config
     end
 

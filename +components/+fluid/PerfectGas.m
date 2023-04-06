@@ -26,7 +26,7 @@ classdef PerfectGas
                     obj.CP = 5192.6;
                     obj.CV = 3116;
                 case "Hydrogen"
-                    error("TODO...")
+                    error("Perfect gas hydrogen is not available")
                 otherwise
                     error("Unknown gas name: %s", params.name)
             end

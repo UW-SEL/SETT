@@ -40,7 +40,6 @@ classdef FixedConductanceCapacitance < handle
 
         function update(obj, engine)
             % Update the value for DT based on the current engine state
-            % TODO: add catch for UA < 0 is a perfect hxr
 
             % Calculate average capacitance rate
             m_dot_avgs = 0.5 * (engine.stateValues.m_dot_kr + engine.stateValues.m_dot_rl);

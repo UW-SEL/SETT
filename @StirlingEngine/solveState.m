@@ -39,7 +39,6 @@ function x = solveState(obj, T_c, T_e, P, t)
 
     % Get normalizing enthalpy
     T_ave = (obj.T_cold + obj.T_hot) / 2;
-    % h_norm = obj.fluid.enthalpy(T_ave, obj.P_0);  % TODO: use this when enthalpy() available on all fluids
     h_norm = obj.fluid.allProps(T_ave, obj.P_0).h;
 
     % The state is first solved using averaged enthalpies to determine flow directions
@@ -147,7 +146,6 @@ function x = solveState(obj, T_c, T_e, P, t)
         b_improved = R * P * b;
         y = A_improved \ b_improved;
         x = C * y;
-        % TODO: investigate using linsolve(A,b) and its options instead of A \ b
 
         if all(isPositiveDirection == (x(1:4) > 0))
             break

@@ -11,7 +11,6 @@ function r = PropylGlycol(property, C, T)
     %   cp   -- specific heat at constant pressure [J/kg-K] (P is not required for this property)
     %   visc -- viscosity [Pa-s]
     %   cond -- thermal conductivity [W/m-K]
-    % TODO: Add other properties as needed
     %
     % Note that pressure is not required for some properties and will be silently ignored if it is provided.
     % pressure is constant at atmospheric pressure for enthlapy becaue 

@@ -61,7 +61,6 @@ function [x, fval, exitflag, output] = optimize(obj, target, name, bounds, optio
         lowerBounds(i) = bounds{i}(1);
         upperBounds(i) = bounds{i}(2);
         nominalValues(i) = 0.5 * (lowerBounds(i) + upperBounds(i));
-        % TODO: Could have flag that sets nominal value or uses initialGuess instead of bounds average
         if length(bounds{i}) == 3
             initialGuess(i) = bounds{i}(3);
         end

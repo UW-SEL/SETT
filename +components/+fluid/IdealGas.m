@@ -80,8 +80,6 @@ classdef IdealGas
         end
 
         function r = allProps(obj, T, P)
-            % TODO: consider using Horner"s method for calculating polynomials
-
             R = obj.R;
             T_ref = obj.T_ref;
             a=obj.a;
