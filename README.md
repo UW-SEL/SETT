@@ -84,3 +84,7 @@ Component models are MATLAB classes with a few required properties and methods.
 TODO: Add information about each type of component and what requirements its class has.
 
 Component models can optionally define a `report` method that is called when generating an engine report.  If this method is not defined, a generic report is written for that component.
+
+## Acknowledgments
+
+Initial work on this project was carried out through funding provided by the Army Research Lab through contract W911NF2020215.
